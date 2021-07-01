@@ -1,0 +1,40 @@
+package com.example;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Principal {
+	/**
+	 * Metodo inicial de la aplicacion
+	 * Sacamos lo que queremos escribir por pantalla
+	 * @param args Linea de comandos
+	 */
+public static void main(String[] args) {
+		juega();
+	}
+public static void juega() {
+		 var rnd = new Random();
+		 int objetivo = rnd.nextInt(100);
+		 int intentos = 0;
+		 	while (intentos < 10) {
+		 		Scanner teclado = new Scanner(System.in);
+		 		System.out.println("Dame un número entre el 1 y el 100: ");
+		 		String cadLeida = teclado.nextLine();
+		 		int numLeido = Integer.parseInt(cadLeida);
+		 		if(objetivo < numLeido) {
+		 			System.out.println("El numero buscado es menor, pruebe otra vez");
+		 			System.out.println(objetivo);
+		 			intentos++;}
+		 			else {
+		 				if(objetivo > numLeido) {
+		 					System.out.println("El numero buscado es mayor, pruebe otra vez");
+		 					System.out.println(objetivo);
+				 			intentos++;
+		 				}
+		 				else {
+		 					System.out.println("¡ENHORABUENA, HAS ACERTADO!");
+		 					break;
+		 				}
+		 			}
+		 		}
+		 	}
