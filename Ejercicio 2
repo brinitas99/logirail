@@ -1,0 +1,44 @@
+package com.example;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Principal {
+	/**
+	 * Metodo inicial de la aplicacion
+	 * Sacamos lo que queremos escribir por pantalla
+	 * @param args Linea de comandos
+	 */
+public static void main(String[] args) {
+		decodificar();
+	}
+public static void decodificar() {
+		System.out.println("Dame una cadena de operaciones: ");
+		Scanner teclado = new Scanner(System.in);
+		String cadLeida = teclado.nextLine();
+		int posicionValor=0;
+		String cadenaGuardada="";
+		while (posicionValor < cadLeida.length()) {
+			char letra = cadLeida.charAt(posicionValor);
+			if (letra == '+' || letra == '-' || letra == '*' || letra == '/') {
+				cadenaGuardada = cadenaGuardada + " " + letra;
+				System.out.println(cadenaGuardada);
+				cadenaGuardada="";
+				posicionValor++;
+			}
+				else {
+					if (letra == '=') {
+						cadenaGuardada = cadenaGuardada + " =";
+						System.out.println(cadenaGuardada);
+						cadenaGuardada="";
+						posicionValor++;
+						break;
+					}
+						else {
+							cadenaGuardada = cadenaGuardada + letra;
+							posicionValor++;
+						}
+				}
+		}
+	}
+}
