@@ -1,0 +1,277 @@
+package Ejercicios_DicoDuroDeRoer;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Principal2 {
+	
+	public static void main(String[] args) {
+		Ejercicio7Metodos();
+	}
+	//Ejercicio 1 Basico
+	// Declara dos variables numéricas (con el valor que desees),
+	// muestra por consola la suma, resta, multiplicación, división y módulo (resto de la división).
+	public static void ejercicio1() {
+		int num1=8;
+		int num2=5;
+		
+		System.out.println("La suma es: "+(num1+num2));
+		System.out.println("La resta es: "+(num1-num2));
+		System.out.println("La multiplicacion es: "+(num1*num2));
+		System.out.println("La division es: "+(num1/num2));
+		System.out.println("El módulo es: "+(num1%num2));
+	}
+	// Ejercicio 2 Basico
+	// Declara 2 variables numéricas (con el valor que desees),
+	// he indica cual es mayor de los dos. Si son iguales indicarlo también. Ves cambiando los valores para comprobar que funciona.
+		public static void ejercicio2() {
+			int num1=8;
+			int num2=8;
+			
+			if(num1==num2) {
+				System.out.println("Los numeros son iguales");
+			}
+			else if(num1>num2){
+				System.out.println("El primer numero es mayor que el segundo");
+			}
+			else
+				System.out.println("El segundo numero es mayor que el primero");
+		}
+		// Ejercicio 3 Basico
+		//  Declara un String que contenga tu nombre, después muestra un mensaje de bienvenida por consola. 
+		//Por ejemplo: si introduzco “Fernando”, me aparezca “Bienvenido Fernando”.
+			public static void ejercicio3() {
+				String nombre="Iñigo";
+					System.out.println("Bienvenido " +nombre );
+			}
+		//  Ejercicio 1 Metodos
+		//  Crea una aplicación que nos calcule el área de un circulo, cuadrado o triangulo. 
+		//	Pediremos que figura queremos calcular su área y según lo introducido pedirá los valores necesarios para calcular el área. 
+		//	Crea un método por cada figura para calcular cada área, este devolverá un número real. Muestra el resultado por pantalla
+			    public static void Ejercicio1Metodos() {
+			        String texto="";
+			        double resultado=0;
+			        System.out.println("¿De qué figura deseas calcular el area?");
+			        Scanner teclado = new Scanner(System.in);
+			 		String cadLeida = teclado.nextLine();
+			        switch (cadLeida.toLowerCase()){
+			        case "circulo":
+			        	System.out.println("¿Cual es el radio del circulo?");
+				 		String radioLeido = teclado.nextLine();
+				 		int radio = Integer.parseInt(radioLeido);
+			            resultado=areaCirculo(radio);
+			            break;
+			        case "triangulo":
+			        	System.out.println("¿Cual es la base del triangulo?");
+			        	String baseLeida = teclado.nextLine();
+			            int base = Integer.parseInt(baseLeida);
+			            System.out.println("¿Cual es la altura del triangulo?");
+			        	String alturaLeida = teclado.nextLine();
+			            int altura = Integer.parseInt(alturaLeida);
+			            resultado=areaTriangulo(base, altura);
+			            break;
+			        case "cuadrado":
+			        	System.out.println("¿Cual es la longitud de un lado del cuadrado?");
+			        	String ladoLeido = teclado.nextLine();
+			            int lado = Integer.parseInt(ladoLeido);
+			            resultado=areaCuadrado(lado);
+			            break;
+			        default:
+			            System.out.println("No has introducido una figura correcta");
+			        }
+			        System.out.println("El area del "+cadLeida.toLowerCase()+" es "+resultado);
+			   }
+			   public static double areaCirculo (int radio){
+			        return Math.pow(radio, 2)*Math.PI;
+			    }
+			   public static double areaTriangulo (int base, int altura){
+			        return base*altura/2;
+			    }
+			   public static double areaCuadrado (int lado){
+			        return lado*lado;
+			    }
+		// Ejercicio 2 Metodos
+		// Crea una aplicación que nos genere una cantidad de números enteros aleatorios que nosotros le pasaremos por teclado. 
+		// Crea un método donde pasamos como parámetros entre que números queremos que los genere, 
+		// podemos pedirlas por teclado antes de generar los números. 
+		// Este método devolverá un número entero aleatorio. Muestra estos números por pantalla.
+			   public static void Ejercicio2Metodos() {
+				   int cantidadNumeros=0;
+				   Scanner teclado = new Scanner(System.in);
+				   System.out.println("¿Cuantos numeros aleatorios quieres generar?");
+				   String numeroLeido = teclado.nextLine();
+				   int cantNumeros = Integer.parseInt(numeroLeido);
+				   System.out.println("¿Cual el primer numero entre los que quieres generar los numeros aleatorios?");
+				   String num1Leido = teclado.nextLine();
+				   int num1 = Integer.parseInt(num1Leido);
+				   System.out.println("¿Cual el segundo numero entre los que quieres generar los numeros aleatorios?");
+				   String num2Leido = teclado.nextLine();
+				   int num2 = Integer.parseInt(num2Leido);
+				   int num3;
+				   if (num1==num2) {
+					   System.out.println("Los dos numeros son iguales");
+				   }
+				   else if(num2<num1) {
+					   num3=num1;
+					   num1=num2;
+					   num2=num3;
+				   }
+				  while (cantidadNumeros<cantNumeros){
+					  System.out.println(generarNumeros(num1,num2));
+					  cantidadNumeros++;
+				  } 
+			   }
+			   public static int generarNumeros (int inicio,int ultimo){
+				   if (inicio>=ultimo) {
+					   throw new IllegalArgumentException("El inicio debe de ser menor que el ultimo");
+				   }
+				   Random rnd = new Random();
+				   return rnd.nextInt(ultimo-inicio)+inicio;
+			    }
+			// Ejercicio 3 Metodos
+			// Crea una aplicación que nos pida un número por teclado y con un método se lo pasamos por parámetro 
+			// para que nos indique si es o no un número primo, debe devolver true si es primo sino false.
+			// Un número primo es aquel solo puede dividirse entre 1 y si mismo. Por ejemplo: 25 no es primo, 
+			// ya que 25 es divisible entre 5, sin embargo, 17 si es primo.
+			// Un buen truco para calcular la raíz cuadrada del numero e ir comprobando que si es divisible desde ese numero hasta 1.
+			   public static void Ejercicio3Metodos() {
+				   Scanner teclado = new Scanner(System.in);
+				   System.out.println("Introduce un numero para saber si es primo");
+				   String numeroLeido = teclado.nextLine();
+				   int numero = Integer.parseInt(numeroLeido);
+				   if (comprobarPrimo(numero)==true) {
+					   System.out.println("El numero introducido es primo");
+				   }
+				   else {
+					   System.out.println("El numero introducido no es primo");
+				   }
+			   }
+			   public static boolean comprobarPrimo (int num){
+				   int cont=0;
+				   int divisor=num/2;
+				   while (divisor>1) {
+					   if (num%divisor==0){
+			                cont+=1;
+					   }
+					   divisor--;
+				   } 
+				   if (cont>=1){
+					   return false;
+				   }
+				   else{
+				       return true;
+				   }
+			   }
+			// Ejercicio 4 Metodos
+			// Crea una aplicación que nos calcule el factorial de un número pedido por teclado, 
+			// lo realizara mediante un método al que le pasamos el número como parámetro. 
+			// Para calcular el factorial, se multiplica los números anteriores hasta llegar a uno. 
+			// Por ejemplo, si introducimos un 5, realizara esta operación 5*4*3*2*1=120.
+			   public static void Ejercicio4Metodos() {
+				   Scanner teclado = new Scanner(System.in);
+				   System.out.println("Introduce el numero para calcular su factorial");
+				   String numeroLeido = teclado.nextLine();
+				   int numero = Integer.parseInt(numeroLeido);
+				   System.out.println(calcularFactorial(numero));
+			   }
+			   public static int calcularFactorial (int num){
+				   int cont=1;
+				   int numAux=1;
+				   while (cont<=num) {
+					   numAux=numAux*cont;
+					   cont++;
+				   }
+				   return numAux;
+			   }
+			// Ejercicio 5 Metodos
+			// Crea una aplicación que nos convierta un número en base decimal a binario. 
+			// Esto lo realizara un método al que le pasaremos el numero como parámetro, 
+			// devolverá un String con el numero convertido a binario. 
+			// Para convertir un numero decimal a binario, 
+			// debemos dividir entre 2 el numero y el resultado de esa división se divide entre 2 de nuevo hasta que no se pueda dividir mas, 
+			// el resto que obtengamos de cada división formara el numero binario, de abajo a arriba.
+				   public static void Ejercicio5Metodos() {
+					   Scanner teclado = new Scanner(System.in);
+					   System.out.println("Introduce el numero para calcular su numero binario");
+					   String numeroLeido = teclado.nextLine();
+					   int numero = Integer.parseInt(numeroLeido);
+					   System.out.println(calcularBinario(numero));
+				   }
+				   public static String calcularBinario (int num){
+					   int divisor=2;
+					   int numAux=num;
+					   String binario="";
+					   while (numAux>0) {
+						   binario=(numAux%divisor)+binario;
+						   numAux=numAux/2;
+					   }
+					   return binario;
+				   }
+			// Ejercicio 6 Metodos
+			// Crea una aplicación que nos cuente el número de cifras de un número entero positivo (hay que controlarlo) 
+			// pedido por teclado. Crea un método que realice esta acción, pasando el número por parámetro, 
+			// devolverá el número de cifras.
+				   public static void Ejercicio6Metodos() {
+					   Scanner teclado = new Scanner(System.in);
+					   System.out.println("Introduce el numero para calcular el numero de cifras que tiene");
+					   String numeroLeido = teclado.nextLine();
+					   int numero = Integer.parseInt(numeroLeido);
+					   if (numero<0) {
+						   throw new IllegalArgumentException("El numero debe de ser positivo");
+					   }
+					   System.out.println(calcularCifras(numero));
+				   }
+				   public static int calcularCifras (int num){
+					   int cont=0;
+					   int numCifras=0;
+					   Integer i = num;
+					   while (cont<i.toString().length()) {
+						  numCifras++;
+						  cont++;
+					   }
+					   return numCifras;
+				   }
+			// Ejercicio 7 Metodos
+			// Crea un aplicación que nos convierta una cantidad de euros introducida por teclado a otra moneda, 
+			// estas pueden ser a dolares, yenes o libras. El método tendrá como parámetros, 
+			// la cantidad de euros y la moneda a pasar que sera una cadena, este no devolverá ningún valor, 
+			// mostrara un mensaje indicando el cambio (void).
+			// El cambio de divisas son:
+			// 0.86 libras es un 1 €
+			// 1.28611 $ es un 1 €
+			// 129.852 yenes es un 1 €
+				   public static void Ejercicio7Metodos() {
+					   Scanner teclado = new Scanner(System.in);
+					   System.out.println("Introduce que cantidad de euros quieres transformar");
+					   String numeroLeido = teclado.nextLine();
+					   int euros = Integer.parseInt(numeroLeido);
+					   System.out.println("Introduce la moneda a la que quieres convertir");
+					   String cadLeida = teclado.nextLine();
+					   if (euros<0) {
+						   throw new IllegalArgumentException("El numero debe de ser positivo");
+					   }
+					   System.out.println(calcularConversion(euros,cadLeida));
+				   }
+				   public static double calcularConversion (int num, String moneda){
+					   double resultado;
+					   double yenes=129.852;
+					   double libras=0.86;
+					   double dolar=1.28611;	   
+					   if (!moneda.toLowerCase().equals("yenes") && !moneda.toLowerCase().equals("dolares") && !moneda.toLowerCase().equals("libras")) {
+						   throw new IllegalArgumentException("La moneda debe de der dolares, yenes o libras");
+					   }
+					   else if (moneda.toLowerCase().equals("yenes")) {
+						   resultado=num*yenes;
+						   return resultado;
+					   }
+						   else if (moneda.toLowerCase().equals("libras")) {
+							   resultado=num*libras;
+							   return resultado;
+						   }
+						   else{
+							   resultado=num*dolar;
+							   return resultado;
+						   }
+					   
+				   } 
+}
